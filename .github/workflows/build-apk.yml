@@ -8,10 +8,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
       - run: npm install
       - uses: expo/expo-github-action@v8
         with:
-          eas-version: latest
+          expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       - run: eas build -p android --profile preview --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: *.apk
